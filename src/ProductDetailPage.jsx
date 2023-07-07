@@ -7,17 +7,33 @@ const ProductDetailPage = () => {
   const [value, setValue] = useState({})
   console.log('value====', value)
 
+  // get data
   const fetchData = async () => {
-    const response = await fetch(`https://dummyjson.com/products/${id}`)
+    const response = await fetch(`http://localhost:3004/products/${id}`)
     // console.log(response);
     const result = await response.json()
-    console.log(result)
+    console.log("result=====",result)
     setValue(result) //update
   }
 
   useEffect(() => {
     fetchData()
   }, [])
+
+  // Post data(store data)
+  const postData = async(value)=>{
+const response = await fetch(`http://localhost:3004/checkout`, {
+  method: 'POST',
+  body: JSON.stringify(value),
+  headers: {
+    'Content-type': 'application/json; charset=UTF-8',
+  }
+  })
+    // console.log(response);
+    const result = await response.json()
+    console.log("result=====",result)
+    // setValue(result) //update
+}
 
   return (
     <>
@@ -28,7 +44,7 @@ const ProductDetailPage = () => {
         <img src={value.thumbnail} alt="" className="h-60" />
         <div className='flex gap-6 my-5'>
           <h2>{value.price}</h2>
-          <button className="bg-red-300 px-3 rounded">Buy</button>
+          <button className="bg-red-300 px-3 rounded" onClick={()=> postData(value)}>Buy</button>
         </div>
       </div>
 
@@ -41,4 +57,4 @@ const ProductDetailPage = () => {
   )
 }
 
-export default ProductDetailPage
+export default ProductDetailPage;

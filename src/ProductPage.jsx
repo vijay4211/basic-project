@@ -3,15 +3,16 @@ import { useNavigate } from 'react-router-dom';
 
 
 const ProductPage = () => {
-  const url = "https://dummyjson.com/products"
+  const url = "http://localhost:3004/products"
   const [data, setData] = useState([]);
   const navigate = useNavigate()
 
   const fetchData = async()=>{
       const response = await fetch(url);
       const result = await response.json()
-      console.log(result.products);
-      setData(result.products);
+      // console.log(result.products);
+      // console.log("result===",result);
+      setData(result);
   }
   useEffect(()=>{
       fetchData();
