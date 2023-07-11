@@ -22,14 +22,14 @@ const Cart = () => {
     const deleteData = async (id) => {
       const response = await fetch(`http://localhost:3004/checkout/${id}`, {
         method: 'DELETE',
-        body: JSON.stringify(data),
+        // body: JSON.stringify(data), 
         headers: {
           'Content-type': 'application/json; charset=UTF-8',
         },
       })
       // console.log(response);
       const result = await response.json()
-      console.log('result=====', result)
+    //   console.log('result=====', result)
       getData();
       // setValue(result) //update the result
     }

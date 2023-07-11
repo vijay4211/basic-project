@@ -4,6 +4,9 @@ import ProductPage from './ProductPage'
 import ProductDetailPage from './ProductDetailPage'
 import Navbar from './Navbar'
 import Cart from './Cart'
+import PaymentPage from './PaymentPage'
+import Login from './Login'
+import SignUp from './SignUp'
 
 const App = () => {
 
@@ -14,6 +17,9 @@ const App = () => {
       <Route path='/' element={<ProductPage />}/>
       <Route path='productdetailpage/:id' element={<ProductDetailPage />}/>
       <Route path='/cart' element={<Cart />}/>
+      <Route path='/paymentpage' element={<PaymentPage />}/>
+      <Route path='login' element={<Login />}/>
+      <Route path='signup' element={<SignUp />}/>
      </Routes>
     </BrowserRouter>
   )

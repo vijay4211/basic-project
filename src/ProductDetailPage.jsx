@@ -5,16 +5,16 @@ import { FaGreaterThan, FaLessThan } from 'react-icons/fa'
 
 const ProductDetailPage = () => {
   const { id } = useParams() //access id using useParams
-  // console.log('id===', id) //show the id number
-  const [value, setValue] = useState({})
-  console.log('value====', value) //initially is empty object
+  // console.log('(ProductDetailPage) id===', id) //show the id number
+  const [value, setValue] = useState();
+  console.log('(ProductDetailPage) value====', value) //initially is empty object
 
   // get data:------------
   const fetchData = async () => {
     const response = await fetch(`http://localhost:3004/products/${id}`)
     // console.log(response);
     const result = await response.json()
-    // console.log('result=====', result)
+    // console.log('(ProductDetailPage) result=====', result)
     setValue(result) //update the result
   }
 
@@ -31,10 +31,9 @@ const ProductDetailPage = () => {
         'Content-type': 'application/json; charset=UTF-8',
       },
     })
-    // console.log(response);
+    // console.log("(postData) response=====",response);
     const result = await response.json()
-    // console.log('result=====', result)
-    // setValue(result) //update the result
+    // console.log('(postData) result=====', result)
   }
 
   return (
@@ -44,7 +43,12 @@ const ProductDetailPage = () => {
           <div className="border-2 border-red-600">
             <img src={value.thumbnail} alt="" className="h-60" />
             <div className="flex justify-between">
-              <button className="bg-red-200 px-2" onClick={()=>postData(value)}>ADD TO CART</button>
+              <button
+                className="bg-red-200 px-2"
+                onClick={() => postData(value)}
+              >
+                ADD TO CART
+              </button>
               <button className="bg-blue-200 px-2">BUY NOW</button>
             </div>
           </div>
@@ -59,15 +63,9 @@ const ProductDetailPage = () => {
 
       <div className="border-2 border-red-300 w-5/6 flex gap-3 mt-5 px-3 h-30 relative">
         {value?.images?.map((item, id) => {
-          //id or index
           return (
-            <div className="border-2 border-green-900 ml-7">
-              <img
-                src={item}
-                key={id}
-                alt=""
-                className="w-28 object-fill py-3"
-              />
+            <div className="border-2 border-green-900 ml-7" key={id}>
+              <img src={item} alt="" className="w-28 object-fill py-3" />
             </div>
           )
         })}

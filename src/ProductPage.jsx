@@ -1,25 +1,25 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+// Get Data:--------------
 const ProductPage = () => {
   const url = 'http://localhost:3004/products'
   const [data, setData] = useState([]) 
-  // console.log("data===",data); //initially is empty array
+  // console.log("(ProductPage) data===",data); //initially is empty array
   const navigate = useNavigate()
-
+// (ProductPage)
   const fetchData = async () => {
     const response = await fetch(url)
     const result = await response.json()
-    // console.log(result.products);
-    // console.log("result===",result);
+    // console.log("(ProductPage) result===",result);
     setData(result) //update to result and pass in variable "data"
   }
   useEffect(() => {
     fetchData(); //called the function
   }, [])
 
-  const detailPage = (id) => {
-    navigate(`productdetailpage/${id}`) 
+  const detailPage = (id) => { //take parameter is "id"
+    navigate(`productdetailpage/${id}`) //Redirect to the ProductDetailPage
   }
 
   return (
@@ -30,6 +30,7 @@ const ProductPage = () => {
             <article
               key={item.id}
               className="shadow-lg text-center p-5"
+              // called detailPage function and passed item.id
               onClick={() => detailPage(item.id)}
             >
               <img
