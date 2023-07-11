@@ -1,14 +1,57 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const PaymentPage = () => {
+
+const navigation  =  useNavigate()
+
+  const [state, setState] = useState({
+    fname: '',
+    mobile: '',
+    pincode: '',
+    locality: '',
+    address: '',
+    city: '',
+    select: '',
+    landmark: '',
+    alternate_phone_number: '',
+  })
+
+  const handleChange = (evt) => {
+    const value = evt.target.value
+    // console.log("value=====",value);
+    // console.log(evt);
+    setState({
+      ...state,
+      [evt.target.name]: value,
+    })
+  }
+  // console.log("state=====>",state);
+
+  const placeOrder = async () => {
+    // console.log("state=====>",state);
+    const response = await fetch(`http://localhost:3004/address`, {
+      method: 'POST',
+      body: JSON.stringify(state),
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      },
+    })
+    // console.log("(postData) response=====",response);
+    const result = await response.json()
+    // console.log("result====>",result);
+
+     navigation('/');
+  }
+
   return (
-    <div className="flex gap-6 w-4/6 mx-auto mt-6">
+    <div className="flex gap-6  mx-auto mt-6">
       {/* Left Side */}
-      <div className="bg-gray-200 w-8/12 ">
-        <div className="border-2 border-red-500 h-30 py-5 px-5  flex justify-between items-center mb-4">
+      <div className="bg-gray-200 w-8/12">
+        <div className="h-30 py-5 px-5  flex justify-between items-center mb-4">
           <div className="">
             <div className="flex gap-3">
-              <span className=" bg-gray-300 p-3 w-3 h-3 flex justify-center items-center border-2 border-green-300">
+              <span className=" bg-gray-300 p-3 w-3 h-3 flex justify-center items-center">
                 1
               </span>
               <span>LOGIN</span>
@@ -23,9 +66,9 @@ const PaymentPage = () => {
         </div>
         <div className="w-full">
           <div className="bg-blue-600 h-11 flex items-center gap-5 px-8">
-            <spa className="bg-white w-7 h-7 flex justify-center items-center text-blue-500 font-medium">
+            <span className="bg-white w-7 h-7 flex justify-center items-center text-blue-500 font-medium">
               2
-            </spa>
+            </span>
             <span className="text-white font-medium">DELIVERY ADDRESS</span>
           </div>
           <div className="px-8 py-3">
@@ -40,25 +83,52 @@ const PaymentPage = () => {
             <span className="text-white">@</span>
             <span className=" text-white">Use my current location</span>
           </div>
-          {/* input form */}
+          {/* input form :====================================== */}
           <div className="ml-14 pb-4 max-w-fit">
             <div className="mb-3 flex gap-3">
-              <input type="text" placeholder="Name" className="py-3 px-6" />
+              <input
+                type="text"
+                placeholder="Name"
+                className="py-3 px-6"
+                name="fname"
+                value={state.fname}
+                onChange={handleChange}
+              />
               <input
                 type="number"
                 placeholder="10-digit mobile number"
                 className="py-3 px-6"
+                name="mobile"
+                value={state.mobile}
+                onChange={handleChange}
               />
             </div>
             <div className="mb-3 flex gap-3">
-              <input type="text" placeholder="Pincode" className="py-3 px-6" />
-              <input type="text" placeholder="Locality" className="py-3 px-6" />
+              <input
+                type="text"
+                placeholder="Pincode"
+                className="py-3 px-6"
+                name="pincode"
+                value={state.pincode}
+                onChange={handleChange}
+              />
+              <input
+                type="text"
+                placeholder="Locality"
+                className="py-3 px-6"
+                name="locality"
+                value={state.locality}
+                onChange={handleChange}
+              />
             </div>
             <div className="mb-3">
               <input
                 type="text"
                 placeholder="Address (Area and Street)"
                 className="w-full h-24"
+                name="address"
+                value={state.address}
+                onChange={handleChange}
               />
             </div>
             <div className="mb-3 flex gap-3">
@@ -66,9 +136,19 @@ const PaymentPage = () => {
                 type="text"
                 placeholder="City/District/Town"
                 className="py-3 px-6"
+                name="city"
+                value={state.city}
+                onChange={handleChange}
               />
-              <select name="" id="" className="py-3 px-6">
+              <select
+                name="select"
+                onChange={handleChange}
+                className="py-3 px-6"
+              >
                 <option value="">--Select State--</option>
+                <option value="Maharashtra">Maharashtra</option>
+                <option value="Delhi">Delhi</option>
+                <option value="Gujarat">Gujarat</option>
               </select>
             </div>
             <div className="flex gap-3 mb-4">
@@ -76,28 +156,31 @@ const PaymentPage = () => {
                 type="text"
                 placeholder="Landmark (Optional)"
                 className="py-3 px-6"
+                name="landmark"
+                value={state.landmark}
+                onChange={handleChange}
               />
               <input
                 type="text"
                 placeholder="Alternate Phone (Optional)"
                 className="py-3 px-6"
+                name="alternate_phone_number"
+                value={state.alternate_phone_number}
+                onChange={handleChange}
               />
             </div>
-            <div className="mb-4">Address Type</div>
-            <div className="flex gap-2">
-              <input type="radio"/>
-              <span>Home (All day delivery)</span>
-            </div>
-            <div className="flex gap-2">
-              <input type="radio" />
-              <span>Work(Delivery between 10 AM - 5 PM)</span>
-            </div>
+            <button
+              className="bg-orange-300 px-5 py-1 text-black font-medium"
+              onClick={placeOrder}
+            >
+              Submit
+            </button>
           </div>
         </div>
       </div>
 
       {/* Right Side */}
-      <div className="border-2 border-red-900 w-2/6 max-w-fit">
+      <div className="w-2/6 max-w-fit">
         <div className="py-2 shadow-lg max-w-fit">
           <div className="py-2 px-6">PRICE DETAILS</div>
           <hr className="mb-3" />

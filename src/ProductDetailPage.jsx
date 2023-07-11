@@ -41,7 +41,7 @@ const ProductDetailPage = () => {
       <div className="">
         <div className="flex gap-5 w-3/4">
           <div className="border-2 border-red-600">
-            <img src={value.thumbnail} alt="" className="h-60" />
+            <img src={value?.thumbnail} alt="" className="h-60" />
             <div className="flex justify-between">
               <button
                 className="bg-red-200 px-2"
@@ -53,10 +53,10 @@ const ProductDetailPage = () => {
             </div>
           </div>
           <div className="shadow-xl w-2/4 font-serif">
-            <h1>Brand : {value.brand}</h1>
-            <h3>Title : {value.title}</h3>
-            <h3>Category : {value.category}</h3>
-            <h2>Price : {value.price}</h2>
+            <h1>Brand : {value?.brand}</h1>
+            <h3>Title : {value?.title}</h3>
+            <h3>Category : {value?.category}</h3>
+            <h2>Price : {value?.price}</h2>
           </div>
         </div>
       </div>

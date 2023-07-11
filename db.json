@@ -537,5 +537,41 @@
       ]
     }
   ],
-  "address": []
+  "address": [
+    {
+      "fname": "vijay",
+      "mobile": "1111111111",
+      "pincode": "431008",
+      "locality": "harsool",
+      "address": "Auragabad maharashtra",
+      "city": "Aurangabad",
+      "select": "Maharashtra",
+      "landmark": "kolhanwadi road",
+      "alternate_phone_number": "00000000000",
+      "id": 1
+    }
+  ],
+  "users": [
+    {
+      "fistName": "vijay",
+      "lastName": "Pandit",
+      "email": "vijay@gmail.com",
+      "password": "11111",
+      "id": 1
+    },
+    {
+      "fistName": "mangesh",
+      "lastName": "pandit",
+      "email": "mangesh2042@gmail.com",
+      "password": "12345",
+      "id": 2
+    },
+    {
+      "fistName": "mangesh1",
+      "lastName": "pandit1",
+      "email": "mangesh2043@gmail.com",
+      "password": "123456",
+      "id": 3
+    }
+  ]
 }
